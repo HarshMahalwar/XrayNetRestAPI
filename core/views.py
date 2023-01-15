@@ -103,6 +103,8 @@ class ResultView(APIView):
                 predicted_label_covid = get_prediction_Covid(image_bytes)
                 description = f"Covid-19 : {predicted_label_covid}\nPneumonia : {predicted_label}"
                 result_list.append({'result_pneumonia': predicted_label, 'result_covid': predicted_label_covid, 'desc': description})
+            else:
+                result_list.append({'error': "Image received was not a Xray Image"})
         except RuntimeError as re:
             print(re)
         return Response(result_list)
