@@ -97,7 +97,7 @@ class ResultView(APIView):
         result_list = []
         image_bytes = image.file.read()
         try:
-            check_for_xray = "normal"
+            check_for_xray = get_prediction_Xray(image_bytes)
             if check_for_xray == check_label:
                 predicted_label = get_prediction(image_bytes)
                 predicted_label_covid = get_prediction_Covid(image_bytes)
