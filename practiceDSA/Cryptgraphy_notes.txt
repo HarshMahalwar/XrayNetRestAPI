@@ -1,0 +1,212 @@
+\documentclass[11pt]{article}
+\usepackage[hmargin=1in,vmargin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb,amsfonts,url,sectsty,framed,tcolorbox,framed}
+\newcommand{\pf}{{\bf Proof: }}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+\newcommand{\qed}{\hfill \rule{2mm}{2mm}}
+\usepackage[us]{datetime}
+
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent
+\rule{\textwidth}{1pt}
+\begin{center}
+{\bf [CS304] Introduction to Cryptography and Network Security}
+\end{center}
+Course Instructor: Dr. Dibyendu Roy \hfill Winter 2022-2023\\
+Scribed by: Harsh Mahalwar (202051082) \hfill Lecture (Week 1)
+\\
+\rule{\textwidth}{1pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%write here
+\begin{center}
+\textbf{Lecture 1}
+\end{center}
+\begin{center}
+\section{Introduction}
+\end{center}
+Cryptography is a technique for encrypting data and communications so that only the intended audience can read and comprehend it.
+
+In computer science, the term "cryptography" refers to safe information and communication methods that use mathematical principles and a system of calculations based on rules, or "algorithms," to change messages in ways that are challenging to read. These deterministic algorithms are employed in the creation of cryptographic keys, digital signature, online browsing on the internet, and private communications like email and credit card transactions.\\
+
+Cryptography is closely related to the disciplines of cryptology and cryptanalysis. It includes techniques such as microdots, merging words with images and other ways to hide information in storage or transit. However, in today's computer-centric world, cryptography is most often associated with scrambling plaintext (ordinary text, sometimes referred to as cleartext) into ciphertext (a process called encryption), then back again (known as decryption). Individuals who practice this field are known as cryptographers.\\
+
+\begin{center}
+\section{Encryption and Decryption}
+\end{center}
+Plain text is readable and understandable information that we want to keep private, such as an ATM PIN. We utilise a "key," or a particular function, to transform the plain text into an unintelligible value. The plain text value ("P") and the key are combined to produce the nonsense value, denoted by the symbol "Y." ("X"). This procedure renders the data illegible to unauthorised parties, aiding in the security of the data.\\
+   \[ P + X = Y \]
+If "C" stands for the cypher text and "E" and "D" stand for encryption and decryption, respectively, then, for the time being, let's assume that $K^{-1}$ is the function that converts C back into P. Then, \\
+  \[ E(P,K) = C \quad\quad D(C,K^{-1}) = P \]
+
+These systems will be aware of E and D. To share the key properly and safely, the system must be designed.\\
+\begin{center}
+\section{Type of Keys in Cryptography}
+\end{center}
+There are two types of cryptography keys. 
+\begin{itemize}
+    \item \textbf{Symmetric Key Cryptography}: This type has only one secret key, i.e., these algorithms have the same encryption and decryption keys.
+    \[ E(P,S) = C \quad\quad D(C,S) = P \]
+    \item \textbf{Public Key Cryptography}: This has 2 keys. The Encryption and Decryption keys will be related to each other. Public and Private keys.
+    \[ E(P,X) = C \quad\quad D(C,Y) = P \]
+\end{itemize}
+\begin{center}
+    \section{Cryptography provides following security services}
+\end{center}
+The following sevices are provided by Cryptography which makes it important, 
+\begin{itemize}
+    \item \textbf{Confidentiality}: achieve using encrytion and decreption
+    \item \textbf{Integrity}: To verify that a received message has been correctly received and has not been altered, one could use a checksum or a message authentication code (MAC).
+    \item \textbf{Authentication}: It is important to verify the identity of the sender of a message to ensure that it is coming from the correct source, which can be done through the use of authentication techniques such as digital signatures or public key infrastructure (PKI).
+    \item \textbf{Non-repudiation}: A mechanism, such as mobile authentication using facial recognition or a PIN, can be used to confirm that the sender of a message is the same person who claims to have sent it.
+\end{itemize}
+\begin{center}
+    \section{Caesars Cipher}
+\end{center}
+The Caesar cipher is an encryption technique that involves shifting the letters of the alphabet by a fixed number. In this case, the number is 3. To decrypt the message, the letters are shifted back by the same number, but if the result is negative, 26 is added to keep the value positive. This technique is named after Julius Caesar, who is believed to have used it in his communications.
+
+\[ E(L, 3) = (L+3)\%26 = C \]
+\[ D(C, 3) = (C-3+26)\%26 = (C+23)\%26 = L \]\\
+
+\textit{For Example)} Plain text = "HARSH", gives the Cipher text = "KDUVK".
+\pagebreak
+
+\begin{center}
+\textbf{Lecture 2}
+\end{center}
+
+\section{One-way Functions}
+A one-way function is a function that is easy to compute in one direction but difficult to invert. Given an input "x" from a set "X," it is easy to compute the output "f(x)" in the set "Y." However, given "f(x)," it is difficult to find the original input "x." These computations must be able to be done in polynomial time
+
+\textit{For Example)} Finding the product of two prime numbers, "p" and "q," is a relatively easy task, as the product "pq" is simply the result of multiplying the two numbers together. However, given the product "pq," it is difficult to find the original prime numbers "p" and "q" that multiply to produce "pq." This task becomes increasingly difficult as the value of "pq" increases. For example, finding the prime factors of 77 (which is the product of 11 and 7) is relatively easy, but finding the prime factors of a large number like 549865157 is impractical in polynomial time. This property of prime numbers is known as the "difficulty of integer factorization," and it is an important concept in cryptography.
+\begin{center}
+\section{Substitution box}    
+\end{center}
+
+"S" is a function that maps elements from set "A" to set "B," where the number of elements in "B" is less than or equal to the number of elements in "A."
+
+\textit{Example)} S: \{1,2,3,4\} $\longrightarrow$ \{1,2,3\}.
+Here, S(1)=1, S(2)= 3, S(3)=2, S(4)=1
+
+\begin{center}
+    \section{Transposition Cipher}
+\end{center}
+The plain text "M" is made up of "t" letters, represented as $m_{1}$, $m_{2}$, $\dots$, $m_{t}$. The secret key "e" is a permutation, or rearrangement, of those "t" letters. In other words, the key "e" determines the order in which the letters of the plain text are rearranged to create the encrypted message.
+
+The Cipher text, C = $m_{e(1)}$, $m_{e(2)}$, $\dots$, $m_{e(t)}$ = $C_{1}$, $C_{2}$, $\dots$, $C_{t}$
+
+The Decrpytion, M = $m_{e^{-1}(1)}$, $m_{e^{-1}(2)}$, $\dots$, $m_{e^{-1}(t)}$
+
+\textit{Example)} Plain text: CAESAR 
+
+\def\e{\begin{bmatrix}
+C & A & E & S & A & R \\
+1 & 2 & 3 & 4 & 5 & 6 \\
+6 & 4 & 1 & 3 & 5 & 2
+\end{bmatrix}}
+
+\hspace{2cm} e = $\e$.\\
+
+\hspace{1cm} Cipher text= RSCEAA = $C_{1}$,$C_{2}$,$C_{3}$,$C_{4}$,$C_{5}$,$C_{6}$, 
+
+\def\d{\begin{bmatrix}
+R & S & C & E & A & A \\
+1 & 2 & 3 & 4 & 5 & 6 \\
+3 & 6 & 4 & 2 & 5 & 1
+\end{bmatrix}}
+
+\hspace{2cm} d = $\d$ = e^{-1} 
+
+It is important to note that the secret key for a message will depend on the length of the message.
+\begin{center}
+    \section{Substitution Cipher}
+\end{center}
+Here we map each letter in the English alphabet A to itself. We have the message, M = $M_{1}$, $M_{2}$, ..., $M_{t}$. With A = {A, B, C, ..., Z} where $m_{i}$ $\in$ A. Encryption e will be a substitution from A to A. \\
+\textit{Example)} e(A)=Z, e(B)=D, e(C)=A and so on.
+\begin{center}
+    \section{Affine Ciper}
+\end{center}
+
+The affine cipher is a type of encryption that maps each letter of the plaintext to a unique letter of the ciphertext alphabet using a linear transformation. The set of letters used in the affine cipher is the full alphabet of 26 letters in the English language \\
+
+The secret key for the affine cipher consists of two integers, "a" and "b," which are used to determine the mathematical function that is applied to the letters of the plaintext during the encryption process. In order for the affine cipher to work correctly, the integers "a" and "b" must be chosen such that the greatest common divisor (gcd) of "a" and the size of the alphabet (26) is equal to 1. This requirement ensures that the transformation applied by the cipher is invertible, which is necessary for the decryption process.\\
+
+The encryption function of the affine cipher is defined as:
+
+$$C = (a \cdot x + b)\%{26}$$
+
+Where $C$ is the ciphertext letter, $x$ is the plaintext letter, $a$ and $b$ are the secret key integers, and 26 is the size of the alphabet.
+
+The decryption function of the affine cipher is defined as:
+
+$$d = (a^{-1} \cdot (C - b))\%{26}$$
+
+Where $d$ is the plaintext letter, $C$ is the ciphertext letter, $a$ and $b$ are the secret key integers, and 26 is the size of the alphabet. $a^{-1}$ is the multiplicative inverse of $a$ modulo 26, which can be computed using the extended Euclidean algorithm.
+
+The gcd value is important in the affine cipher because $a$ must have an inverse modulo 26 in order for the decryption function to work properly. If the gcd of $a$ and $m$ is not 1, then $a$ does not have a multiplicative inverse modulo 26 and the decryption function will not work.\\
+
+\textbf{Multiplication and Additive Inverse Matrices:} The multiplication and additive inverse matrices of the affine cipher are defined as follows:
+
+\textit{Multiplication Matrix:} Z = (x*y)\%6
+$$\begin{bmatrix}
+0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 2 & 3 & 4 & 5 \\
+0 & 2 & 4 & 0 & 2 & 4 \\
+0 & 3 & 0 & 3 & 0 & 3 \\
+0 & 4 & 2 & 0 & 4 & 2 \\
+0 & 5 & 4 & 3 & 2 & 1
+\end{bmatrix}$$
+
+\textit{Additive Inverse Matrix:} Z = (x+y)\%6
+$$\begin{bmatrix}
+0 & 1 & 2 & 3 & 4 & 5 \\
+1 & 2 & 3 & 4 & 5 & 0 \\
+2 & 3 & 4 & 5 & 0 & 1 \\
+3 & 4 & 5 & 0 & 1 & 2 \\
+4 & 5 & 0 & 1 & 2 & 3 \\
+5 & 0 & 1 & 2 & 3 & 4
+\end{bmatrix}$$
+
+In the case of the affine cipher, the size of the alphabet (26) is equal to the product of two prime numbers (p and q). The Euler Totient Function (Q) for this alphabet size is equal to the product of (p-1) and (q-1). In the case of the affine cipher, this means that there are only 12 possible values that can be used for the secret key integers "a" and "b," out of a total of 26 possible values. This is because the greatest common divisor (gcd) of "a" and 26 must be 1, and there are only 12 values that satisfy this condition.
+\begin{center}
+\section{Playfair Cipher}    
+\end{center}
+
+The playfair cipher involves creating a 5x5 grid using the unique letters of a secret key. The remaining spaces in the grid are filled with the remaining letters of the alphabet, with some letters (such as "I" and "J") treated as equivalent. The grid is used to encrypt and decrypt messages by mapping the letters of the plaintext to specific cells in the grid and applying a set of rules to determine the corresponding ciphertext letters. \\
+
+The playfair cipher involves dividing the plaintext into pairs of letters and applying a set of rules to determine the corresponding ciphertext letters. If the plaintext has an odd number of letters, an "X" is added to make the length even. The rules for determining the ciphertext letters depend on the positions of the letters in the 5x5 grid, with letters in the same row or column being transformed using a circular pattern and letters in different rows and columns being transformed using an imaginary rectangle. \\
+
+\textit{Example)} Secret key = PLAYFAIR EXAMPLE
+
+\hspace{2cm}\textit{5x5 Matrix (I=J):} 
+$$\begin{bmatrix}
+P & L & A & Y & F \\
+I & R & E & X & M \\
+B & C & D & G & H \\
+K & N & O & Q & S \\
+T & U & V & W & Z 
+\end{bmatrix}$$
+
+Plain text = "HIDE" 
+
+Broken in segments of 2 = "HI" "DE"
+
+The letters "H" and "I" in the playfair cypher are changed into "BM" because they appear in different rows and columns of the grid, creating a fictitious rectangle. Because the letters "D" and "E" appear in the same column, their values undergo a circular pattern transformation, resulting in the letter "OD."\\
+
+HIDE becomes BMOD by utilising the Playfair cypher. \\
+
+\centering
+\\
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+\begin{center}
+    END
+\end{center}
+\end{document}
+paraphrase

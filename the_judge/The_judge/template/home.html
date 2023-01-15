@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+     <div class="text-center my-4 container">
+              <div class = "container text-center" style="width: 480px;">
+      {% if image_url is None and predicted_label is None %}
+             <form method="post" enctype="multipart/form-data" style="margin-top: 50px; margin-bottom: 30px;">
+                {% csrf_token %}
+                 <div class = "input-div">
+                     <br/>
+                  <label class = "label-image" for="inputTag">
+                    <i class="fas fa-cloud-upload-alt "></i>
+                      <p>browse file to upload</p>
+                    <input class = "input-image" id="inputTag" type="file" value="{{ form.image }}"/>
+                    <br/>
+                    <span id="imageName"></span></label>
+                </div>
+                 <br>
+            <button type="submit" id="btnUpload" class="btn btn-light">Upload</button>
+            </form>
+    {% elif predicted_label is not None and image_url is not None %}
+        <div class="alert alert-dark" role="alert">
+            Predicted label: <br>
+            Pneumonia : {{predicted_label}}&nbsp;&nbsp;&nbsp;
+            Covid-19 : {{predicted_label_covid}}
+        </div>
+                   <div class="d-flex flex-row text-center">
+                            <div class="p-2">
+                                <p class="small text-center pt-0">
+                                <a href= "{% url 'account:dashboard' %}" role="button">Download the report</a>
+                                </p>
+                            </div>
+                            <div class="p-2">
+                                <p class="small text-center pt-0">
+                                <a href="{% url 'image_classification:index' %}" >Predict new Xray</a>
+                                </p>
+                            </div>
+                        </div>
+    {% else %}
+        <div class="alert alert-warning" role="alert">
+            Prediction error. No label predicted.
+        </div>
+                  <div class="d-flex flex-row text-center">
+                            <div class="p-2">
+                                <p class="small text-center pt-0">
+                                <a href="{% url 'index' %}" >Predict new Xray</a>
+                                </p>
+                            </div>
+                        </div>
+    {% endif %}
+                  </div>
+          </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+      </div>
+</div>
